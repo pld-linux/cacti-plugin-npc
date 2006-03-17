@@ -7,7 +7,6 @@ Version:	0.1.1a
 Release:	0.1
 License:	GPL v2
 Group:		Applications/WWW
-#!!!!problem with version
 Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
 URL:		http://www.cactiusers.org/
