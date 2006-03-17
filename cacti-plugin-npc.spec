@@ -9,7 +9,7 @@ License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
-URL:		http://www.cactiusers.org/
+URL:		http://www.divagater.com/npc/
 BuildRequires:	rpm-perlprov
 Requires:	cacti
 BuildArch:	noarch
