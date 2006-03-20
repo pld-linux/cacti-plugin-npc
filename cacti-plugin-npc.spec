@@ -21,7 +21,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Plugin for Cacti - A UI replacement for Nagios integrated into Cacti.
 
 %description -l pl
-Wtyczka do Cacti - 
+Wtyczka do Cacti - zamiennik interfejsu u¿ytkownika dla Nagiosa
+zintegrowany z Cacti.
 
 %prep
 %setup -q -n %{namesrc}
