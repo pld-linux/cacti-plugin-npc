@@ -1,3 +1,5 @@
+#TODO
+#-  Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
 %define		namesrc	npc
 %include	/usr/lib/rpm/macros.perl
 Summary:	Plugin for Cacti - NPC
@@ -11,11 +13,14 @@ Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
 URL:		http://www.divagater.com/npc/
 BuildRequires:	rpm-perlprov
-Requires:	cacti
-BuildArch:	noarch
+BuildRequires:	nagios-devel
+BuildRequires:	mysql-devel >= 4.1.0
+Requires:	cacti >= 0.8.6h # with plugin-architecture
+Requires:	nagios >= 2.0b4  ### compiled with --enable-event-broker
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		webcactipluginroot /usr/share/cacti/plugins/%{namesrc}
+%define		pathtonagiosmodules	/path/to/nagios/modules
 
 %description
 Plugin for Cacti - A UI replacement for Nagios integrated into Cacti.
@@ -27,10 +32,29 @@ zintegrowany z Cacti.
 %prep
 %setup -q -n %{namesrc}
 
+%build
+# copy ./npc/neb/inserter.c and ./npc/neb/makefile to module/ under Nagios source directory and run make.
+cd ./neb
+%{__make}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{webcactipluginroot}
+install -d $RPM_BUILD_ROOT%{pathtonagiosmodules}
+install ./neb/inserter.o $RPM_BUILD_ROOT%{pathtonagiosmodules}
+rm -fr ./neb
 cp -aRf * $RPM_BUILD_ROOT%{webcactipluginroot}
+
+# Edit nagios.cfg and set:
+#
+#        retain_state_information=0
+#        event_broker_options=-1
+#        broker_module=%{pathtonagiosmodules}/inserter.o
+
+# Setting retain_state_information=0 causes all hosts and services to
+# go to a pending state until rechecked by Nagios. Without this setting
+# the inserter module will never update any data in NPC. Its a minor
+# inconvenience that I will try to fix in the inserter module.
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -39,3 +63,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc TODO README 
 %{webcactipluginroot}
+%{pathtonagiosmodules}/inserter.o
