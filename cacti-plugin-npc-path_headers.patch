@@ -1,0 +1,28 @@
+diff -uNr npc.orig/neb/inserter.c npc/neb/inserter.c
+--- npc.orig/neb/inserter.c	2005-11-12 15:44:11.000000000 +0100
++++ npc/neb/inserter.c	2006-03-28 09:09:33.000000000 +0200
+@@ -44,16 +44,16 @@
+ #include <mysql/errmsg.h>
+ 
+ /* include the needed event broker header files */
+-#include "../include/nebmodules.h"
+-#include "../include/nebcallbacks.h"
+-#include "../include/nebstructs.h"
+-#include "../include/broker.h"
++#include "nagios/nebmodules.h"
++#include "nagios/nebcallbacks.h"
++#include "nagios/nebstructs.h"
++#include "nagios/broker.h"
+ 
+ /* include some Nagios stuff as well */
+-#include "../include/config.h"
+-#include "../include/common.h"
+-#include "../include/nagios.h"
+-#include "../include/objects.h"
++#include "nagios/config.h"
++#include "nagios/common.h"
++#include "nagios/nagios.h"
++#include "nagios/objects.h"
+ 
+ #include <sys/types.h>
+ #include <string.h>
