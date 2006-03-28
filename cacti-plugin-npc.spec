@@ -37,7 +37,6 @@ zintegrowany z Cacti.
 %patch0 -p1
 
 %build
-# copy ./npc/neb/inserter.c and ./npc/neb/makefile to module/ under Nagios source directory and run make.
 cd ./neb
 %{__make}
 
