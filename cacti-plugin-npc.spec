@@ -14,12 +14,10 @@ Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
 Patch0:		%{name}-path_headers.patch
 URL:		http://www.divagater.com/npc/
 BuildRequires:	rpm-perlprov
-BuildRequires:	nagios-devel
+BuildRequires:	nagios-devel >= 2.1
 BuildRequires:	mysql-devel >= 4.1.0
 Requires:	cacti >= 0.8.6h
-# with plugin-architecture
-Requires:	nagios >= 2.0b4
-### compiled with --enable-event-broker
+Requires:	nagios >= 2.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		webcactipluginroot /usr/share/cacti/plugins/%{namesrc}
