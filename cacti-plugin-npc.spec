@@ -1,5 +1,5 @@
-#TODO
-#-  Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
+# TODO
+# -  Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
 %define		namesrc	npc
 %include	/usr/lib/rpm/macros.perl
 Summary:	Plugin for Cacti - NPC
@@ -11,12 +11,15 @@ License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
+Patch0:		%{name}-path_headers.patch
 URL:		http://www.divagater.com/npc/
 BuildRequires:	rpm-perlprov
 BuildRequires:	nagios-devel
 BuildRequires:	mysql-devel >= 4.1.0
-Requires:	cacti >= 0.8.6h # with plugin-architecture
-Requires:	nagios >= 2.0b4  ### compiled with --enable-event-broker
+Requires:	cacti >= 0.8.6h
+# with plugin-architecture
+Requires:	nagios >= 2.0b4
+### compiled with --enable-event-broker
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		webcactipluginroot /usr/share/cacti/plugins/%{namesrc}
@@ -31,6 +34,7 @@ zintegrowany z Cacti.
 
 %prep
 %setup -q -n %{namesrc}
+%patch0 -p1
 
 %build
 # copy ./npc/neb/inserter.c and ./npc/neb/makefile to module/ under Nagios source directory and run make.
