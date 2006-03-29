@@ -21,7 +21,7 @@ Requires:	nagios >= 2.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		webcactipluginroot /usr/share/cacti/plugins/%{namesrc}
-%define		pathtonagiosmodules	/path/to/nagios/modules
+%define		pathtonagiosmodules	/usr/lib/nagios/modules
 
 %description
 Plugin for Cacti - A UI replacement for Nagios integrated into Cacti.
