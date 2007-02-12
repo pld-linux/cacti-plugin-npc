@@ -3,7 +3,7 @@
 %define		namesrc	npc
 %include	/usr/lib/rpm/macros.perl
 Summary:	Plugin for Cacti - NPC
-Summary(pl.UTF-8):   Wtyczka do Cacti - NPC
+Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	0.1.1a
 Release:	0.1
