@@ -3,7 +3,7 @@
 %define		namesrc	npc
 %include	/usr/lib/rpm/macros.perl
 Summary:	Plugin for Cacti - NPC
-Summary(pl):	Wtyczka do Cacti - NPC
+Summary(pl.UTF-8):   Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	0.1.1a
 Release:	0.1
@@ -26,8 +26,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Plugin for Cacti - A UI replacement for Nagios integrated into Cacti.
 
-%description -l pl
-Wtyczka do Cacti - zamiennik interfejsu uøytkownika dla Nagiosa
+%description -l pl.UTF-8
+Wtyczka do Cacti - zamiennik interfejsu u≈ºytkownika dla Nagiosa
 zintegrowany z Cacti.
 
 %prep
