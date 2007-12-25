@@ -6,13 +6,17 @@ Summary:	Plugin for Cacti - NPC
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	0.1.1a
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Applications/WWW
-Source0:	http://www.divagater.com/npc/%{namesrc}-%{version}.tar.gz
+Source0:	http://forums.cacti.net/files/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
 Patch0:		%{name}-path_headers.patch
-URL:		http://www.divagater.com/npc/
+# inserter.c patch for nagios 3.0b6 from http://forums.cacti.net/about10327-0-asc-150.html
+#Patch1:		http://forums.cacti.net/files/neb_159.patch
+# from http://forums.cacti.net/about10327-0-asc-135.html
+Patch1:		%{name}-extinfo.patch
+URL:		http://forums.cacti.net/about10327
 BuildRequires:	rpm-perlprov
 BuildRequires:	nagios-devel >= 2.1
 BuildRequires:	mysql-devel >= 4.1.0
@@ -33,6 +37,7 @@ zintegrowany z Cacti.
 %prep
 %setup -q -n %{namesrc}
 %patch0 -p1
+%patch1 -p1
 
 %build
 cd ./neb
