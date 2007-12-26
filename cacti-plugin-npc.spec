@@ -1,5 +1,6 @@
 # TODO
-# -  Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
+# - Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
+# - not lib64 safe
 %define		namesrc	npc
 %include	/usr/lib/rpm/macros.perl
 Summary:	Plugin for Cacti - NPC
@@ -13,13 +14,13 @@ Source0:	http://forums.cacti.net/files/%{namesrc}-%{version}.tar.gz
 # Source0-md5:	325f2e49070420346b55b7b4e2994d34
 Patch0:		%{name}-path_headers.patch
 # inserter.c patch for nagios 3.0b6 from http://forums.cacti.net/about10327-0-asc-150.html
-#Patch1:		http://forums.cacti.net/files/neb_159.patch
+#Patch1: http://forums.cacti.net/files/neb_159.patch
 # from http://forums.cacti.net/about10327-0-asc-135.html
 Patch1:		%{name}-extinfo.patch
 URL:		http://forums.cacti.net/about10327
-BuildRequires:	rpm-perlprov
-BuildRequires:	nagios-devel >= 2.1
 BuildRequires:	mysql-devel >= 4.1.0
+BuildRequires:	nagios-devel >= 2.1
+BuildRequires:	rpm-perlprov
 Requires:	cacti >= 0.8.6h
 Requires:	nagios >= 2.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -40,16 +41,16 @@ zintegrowany z Cacti.
 %patch1 -p1
 
 %build
-cd ./neb
+cd neb
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{webcactipluginroot}
 install -d $RPM_BUILD_ROOT%{pathtonagiosmodules}
-install ./neb/inserter.o $RPM_BUILD_ROOT%{pathtonagiosmodules}
-rm -fr ./neb
-cp -aRf * $RPM_BUILD_ROOT%{webcactipluginroot}
+install neb/inserter.o $RPM_BUILD_ROOT%{pathtonagiosmodules}
+rm -rf neb
+cp -a * $RPM_BUILD_ROOT%{webcactipluginroot}
 
 # Edit nagios.cfg and set:
 #
@@ -67,6 +68,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc TODO README 
+%doc TODO README
 %{webcactipluginroot}
-%{pathtonagiosmodules}/inserter.o
+%attr(755,root,root) %{pathtonagiosmodules}/inserter.o
