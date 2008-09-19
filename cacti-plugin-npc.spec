@@ -17,7 +17,7 @@ Patch0:		%{name}-path_headers.patch
 #Patch1: http://forums.cacti.net/files/neb_159.patch
 # from http://forums.cacti.net/about10327-0-asc-135.html
 Patch1:		%{name}-extinfo.patch
-URL:		http://forums.cacti.net/about10327
+URL:		http://forums.cacti.net/about10327.html
 BuildRequires:	mysql-devel >= 4.1.0
 BuildRequires:	nagios-devel >= 2.1
 BuildRequires:	rpm-perlprov
