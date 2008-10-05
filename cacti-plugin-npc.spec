@@ -17,6 +17,7 @@ Patch0:		%{name}-path_headers.patch
 # from http://forums.cacti.net/about10327-0-asc-135.html
 Patch1:		%{name}-extinfo.patch
 URL:		http://forums.cacti.net/about10327.html
+BuildRequires:	glib2-devel
 BuildRequires:	mysql-devel >= 4.1.0
 BuildRequires:	nagios-devel >= 2.1
 BuildRequires:	rpm-perlprov
@@ -41,7 +42,8 @@ zintegrowany z Cacti.
 %patch1 -p1
 
 %build
-%{__make} -C neb
+cd neb
+%{__cc} %{rpmcflags} -Wall -o inserter.o inserter.c -shared -I../include $(pkg-config glib-2.0 --cflags) $(mysql_config --cflags --libs) -fPIC
 
 %install
 rm -rf $RPM_BUILD_ROOT
