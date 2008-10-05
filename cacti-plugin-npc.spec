@@ -41,15 +41,14 @@ zintegrowany z Cacti.
 %patch1 -p1
 
 %build
-cd neb
-%{__make}
+%{__make} -C neb
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{plugindir},%{moduledir}}
 install neb/inserter.o $RPM_BUILD_ROOT%{moduledir}
-rm -rf neb
 cp -a . $RPM_BUILD_ROOT%{plugindir}
+rm -rf $RPM_BUILD_ROOT%{plugindir}/neb
 
 # Edit nagios.cfg and set:
 #
