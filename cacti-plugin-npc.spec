@@ -20,6 +20,7 @@ URL:		http://forums.cacti.net/about10327.html
 BuildRequires:	glib2-devel
 BuildRequires:	mysql-devel >= 4.1.0
 BuildRequires:	nagios-devel >= 2.1
+BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov
 Requires:	cacti >= 0.8.6h
 Requires:	nagios >= 2.1
