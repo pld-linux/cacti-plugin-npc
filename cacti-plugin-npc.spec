@@ -19,19 +19,19 @@ BuildRequires:	rpmbuild(macros) >= 1.553
 Requires:	cacti >= 0.8.7b
 Requires:	cacti(pia) >= 2.0
 Requires:	nagios >= 3.0
-Requires:	php-common >= 4:%{php_min_version}
-Requires:	php-ctype
 Requires:	nagios-ndoutils >= 1.4b7
-Requires:	php-date
-Requires:	php-iconv
-Requires:	php-json
-Requires:	php-mbstring
-Requires:	php-mysql
-Requires:	php-mysqli
-Requires:	php-pcre
-Requires:	php-session
-Requires:	php-simplexml
-Requires:	php-spl
+Requires:	php(core) >= %{php_min_version}
+Requires:	php(ctype)
+Requires:	php(date)
+Requires:	php(iconv)
+Requires:	php(json)
+Requires:	php(mbstring)
+Requires:	php(mysql)
+Requires:	php(mysqli)
+Requires:	php(pcre)
+Requires:	php(session)
+Requires:	php(simplexml)
+Requires:	php(spl)
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
