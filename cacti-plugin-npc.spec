@@ -1,74 +1,72 @@
 # TODO
-# - Edit the MySQL options on line 143 of /cacti/plugins/npc/neb/inserter.c
+# - system Doctrine: phpdoctrine.spec
+# - forum thread: http://forums.cacti.net/viewtopic.php?t=26540
 %define		plugin	npc
-%include	/usr/lib/rpm/macros.perl
-Summary:	Plugin for Cacti - NPC
+%define		php_min_version 5.2.1
+%include	/usr/lib/rpm/macros.php
+Summary:	Nagios Plugin for Cacti (NPC)
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
-Version:	0.1.1a
+Version:	2.0.4
 Release:	0.2
-License:	GPL v2
+License:	GPL v3
 Group:		Applications/WWW
-Source0:	http://forums.cacti.net/files/%{plugin}-%{version}.tar.gz
-# Source0-md5:	325f2e49070420346b55b7b4e2994d34
-Patch0:		%{name}-path_headers.patch
-# inserter.c patch for nagios 3.0b6 from http://forums.cacti.net/about10327-0-asc-150.html
-#Patch1: http://forums.cacti.net/files/neb_159.patch
-# from http://forums.cacti.net/about10327-0-asc-135.html
-Patch1:		%{name}-extinfo.patch
-URL:		http://forums.cacti.net/about10327.html
-BuildRequires:	glib2-devel
-BuildRequires:	mysql-devel >= 4.1.0
-BuildRequires:	nagios-devel >= 2.1
-BuildRequires:	pkgconfig
-BuildRequires:	rpm-perlprov
-Requires:	cacti >= 0.8.6h
-Requires:	nagios >= 2.1
+#Source0:	http://downloads.sourceforge.net/gibtmirdas/npc-%{version}.tar.gz
+Source0:	npc-%{version}.tar.gz
+# Source0-md5:	7b30302c544f10ed73cff406fda14499
+URL:		https://trac.assembla.com/npc/
+BuildRequires:	rpmbuild(macros) >= 1.553
+Requires:	cacti >= 0.8.7b
+Requires:	cacti(pia) >= 2.0
+Requires:	nagios >= 3.0
+Requires:	php-common >= 4:%{php_min_version}
+Requires:	php-ctype
+Requires:	nagios-ndoutils >= 1.4b7
+Requires:	php-date
+Requires:	php-iconv
+Requires:	php-json
+Requires:	php-mbstring
+Requires:	php-mysql
+Requires:	php-mysqli
+Requires:	php-pcre
+Requires:	php-session
+Requires:	php-simplexml
+Requires:	php-spl
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		cactidir		/usr/share/cacti
 %define		plugindir		%{cactidir}/plugins/%{plugin}
 %define		moduledir		%{_libdir}/nagios/modules
 
+%define		_noautoreq pear
+
 %description
-Plugin for Cacti - A UI replacement for Nagios integrated into Cacti.
+The purpose of NPC is to be a complete web based UI replacement to
+Nagios while fully integrating into Cacti using the Cacti Plugin
+Architecture. This integration will provide a single point of access
+for trending and alert monitoring.
 
 %description -l pl.UTF-8
 Wtyczka do Cacti - zamiennik interfejsu użytkownika dla Nagiosa
 zintegrowany z Cacti.
 
 %prep
-%setup -q -n %{plugin}
-%patch0 -p1
-%patch1 -p1
-
-%build
-cd neb
-%{__cc} %{rpmcflags} -Wall -o inserter.o inserter.c -shared -I../include $(pkg-config glib-2.0 --cflags) $(mysql_config --cflags --libs) -fPIC
+%setup -qc
+mv %{plugin}/*.debug .
+mv %{plugin}/build.xml .
+mv %{plugin}/{README,LICENSE} .
+%undos -f php README
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{plugindir},%{moduledir}}
-install neb/inserter.o $RPM_BUILD_ROOT%{moduledir}
-cp -a . $RPM_BUILD_ROOT%{plugindir}
-rm -rf $RPM_BUILD_ROOT%{plugindir}/neb
-
-# Edit nagios.cfg and set:
-#
-#        retain_state_information=0
-#        event_broker_options=-1
-#        broker_module=%{moduledir}/inserter.o
-
-# Setting retain_state_information=0 causes all hosts and services to
-# go to a pending state until rechecked by Nagios. Without this setting
-# the inserter module will never update any data in NPC. Its a minor
-# inconvenience that I will try to fix in the inserter module.
+install -d $RPM_BUILD_ROOT%{plugindir}
+cp -a %{plugin}/* $RPM_BUILD_ROOT%{plugindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc TODO README
+%doc README
 %{plugindir}
-%attr(755,root,root) %{moduledir}/inserter.o
