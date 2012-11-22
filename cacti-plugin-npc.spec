@@ -1,5 +1,6 @@
 # TODO
-# - system Doctrine: phpdoctrine.spec
+# - bundles Doctrine 1.0.7: use system phpdoctrine.spec
+# - bundles Ext JS Library 2.2
 # - forum thread: http://forums.cacti.net/viewtopic.php?t=26540
 %define		plugin	npc
 %define		php_min_version 5.2.1
@@ -8,7 +9,7 @@ Summary:	Nagios Plugin for Cacti (NPC)
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	2.0.4
-Release:	0.3
+Release:	0.4
 License:	GPL v3
 Group:		Applications/WWW
 #Source0:	http://downloads.sourceforge.net/gibtmirdas/npc-%{version}.tar.gz
@@ -57,6 +58,13 @@ mv %{plugin}/*.debug .
 mv %{plugin}/build.xml .
 mv %{plugin}/{README,LICENSE} .
 %undos -f php README
+
+# dev code, not needed for production functionality
+cd %{plugin}
+%{__rm} controllers/layoutDev.php
+%{__rm} -r js/src
+%{__rm} js/ext/*-debug.js
+%{__rm} js/ext/resources/resources.jsb
 
 %install
 rm -rf $RPM_BUILD_ROOT
