@@ -8,7 +8,7 @@ Summary:	Nagios Plugin for Cacti (NPC)
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	2.0.4
-Release:	0.2
+Release:	0.3
 License:	GPL v3
 Group:		Applications/WWW
 #Source0:	http://downloads.sourceforge.net/gibtmirdas/npc-%{version}.tar.gz
@@ -69,4 +69,20 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%{plugindir}
+%dir %{plugindir}
+%attr(755,root,root) %{plugindir}/cli.php
+%attr(755,root,root) %{plugindir}/perfdata.php
+%{plugindir}/config.php
+%{plugindir}/index.php
+%{plugindir}/nagioscmd.php
+%{plugindir}/npc.php
+%{plugindir}/setup.php
+%{plugindir}/top_graph_header.php
+%{plugindir}/upgrade_schema.sql
+%{plugindir}/controllers
+%{plugindir}/css
+%{plugindir}/images
+%{plugindir}/js
+%{plugindir}/lib
+%{plugindir}/models
+%{plugindir}/queries
