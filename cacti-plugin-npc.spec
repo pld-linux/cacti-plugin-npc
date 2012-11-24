@@ -14,6 +14,7 @@ License:	GPL v3
 Group:		Applications/WWW
 #Source0:	http://downloads.sourceforge.net/gibtmirdas/npc-%{version}.tar.gz
 Source0:	npc-%{version}.tar.gz
+Patch0:		%{name}-graphs_url.patch
 # Source0-md5:	7b30302c544f10ed73cff406fda14499
 URL:		https://trac.assembla.com/npc/
 BuildRequires:	rpmbuild(macros) >= 1.553
@@ -58,6 +59,7 @@ mv %{plugin}/*.debug .
 mv %{plugin}/build.xml .
 mv %{plugin}/{README,LICENSE} .
 %undos -f php README
+%patch0 -p1
 
 # dev code, not needed for production functionality
 cd %{plugin}
