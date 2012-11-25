@@ -188,7 +188,7 @@ upgrade schema to ndoutils-1.5.2
 -                    UNIQUE KEY `instance_id` (`instance_id`,`configfile_type`,`configfile_path`)
 -                  ) ENGINE=InnoDB COMMENT='Configuration files';";
 +		$sql[] = "
-+			CREATE TABLE IF NOT EXISTS `nagios_configfiles` (
++			CREATE TABLE IF NOT EXISTS `npc_configfiles` (
 +			  `configfile_id` int(11) NOT NULL auto_increment,
 +			  `instance_id` smallint(6) NOT NULL default '0',
 +			  `configfile_type` smallint(6) NOT NULL default '0',
@@ -210,7 +210,7 @@ upgrade schema to ndoutils-1.5.2
 -                    KEY `instance_id` (`instance_id`,`configfile_id`)
 -                  ) ENGINE=InnoDB COMMENT='Configuration file variables';";
 +		$sql[] = "
-+			CREATE TABLE IF NOT EXISTS `nagios_configfilevariables` (
++			CREATE TABLE IF NOT EXISTS `npc_configfilevariables` (
 +			  `configfilevariable_id` int(11) NOT NULL auto_increment,
 +			  `instance_id` smallint(6) NOT NULL default '0',
 +			  `configfile_id` int(11) NOT NULL default '0',
@@ -243,7 +243,7 @@ upgrade schema to ndoutils-1.5.2
 -                  ) ENGINE=InnoDB COMMENT='NDO2DB daemon connection information';";
 +		$sql[] = "
 +
-+			CREATE TABLE IF NOT EXISTS `nagios_conninfo` (
++			CREATE TABLE IF NOT EXISTS `npc_conninfo` (
 +			  `conninfo_id` int(11) NOT NULL auto_increment,
 +			  `instance_id` smallint(6) NOT NULL default '0',
 +			  `agent_name` varchar(32) character set latin1 NOT NULL default '',
