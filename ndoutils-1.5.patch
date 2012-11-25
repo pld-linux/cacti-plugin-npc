@@ -44,7 +44,7 @@ upgrade schema to ndoutils-1.5.2
 -        $sql[] = "INSERT INTO settings VALUES ('npc_time_format','H:i');";
 -        $sql[] = "INSERT INTO settings VALUES ('npc_log_level','0');";
 +		$sql[] = "
-+			CREATE TABLE IF NOT EXISTS `npcacknowledgements` (
++			CREATE TABLE IF NOT EXISTS `npc_acknowledgements` (
 +			  `acknowledgement_id` int(11) NOT NULL auto_increment,
 +			  `instance_id` smallint(6) NOT NULL default '0',
 +			  `entry_time` datetime NOT NULL default '0000-00-00 00:00:00',
