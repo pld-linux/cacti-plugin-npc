@@ -9,12 +9,13 @@ Summary:	Nagios Plugin for Cacti (NPC)
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
 Version:	2.0.4
-Release:	0.4
+Release:	0.7
 License:	GPL v3
 Group:		Applications/WWW
 #Source0:	http://downloads.sourceforge.net/gibtmirdas/npc-%{version}.tar.gz
 Source0:	npc-%{version}.tar.gz
 Patch0:		%{name}-graphs_url.patch
+Patch1:		ndoutils-1.5.patch
 # Source0-md5:	7b30302c544f10ed73cff406fda14499
 URL:		https://trac.assembla.com/npc/
 BuildRequires:	rpmbuild(macros) >= 1.553
@@ -60,9 +61,15 @@ mv %{plugin}/build.xml .
 mv %{plugin}/{README,LICENSE} .
 %undos -f php README
 %patch0 -p1
+%patch1 -p1
+
+cd %{plugin}
+
+# part of ndoutils
+%{__rm} -r queries
+# upgrade_schema.sql - adds indexes to db
 
 # dev code, not needed for production functionality
-cd %{plugin}
 %{__rm} controllers/layoutDev.php
 %{__rm} -r js/src
 %{__rm} js/ext/*-debug.js
@@ -95,4 +102,3 @@ rm -rf $RPM_BUILD_ROOT
 %{plugindir}/js
 %{plugindir}/lib
 %{plugindir}/models
-%{plugindir}/queries
