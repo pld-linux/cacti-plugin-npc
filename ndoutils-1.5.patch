@@ -18,9 +18,9 @@ upgrade schema to ndoutils-1.5.2
  
 +
 +	// Add some default values
-+	$sql[] = "INSERT IGNORE INTO settings VALUES ('npc_date_format','Y-m-d');";
-+	$sql[] = "INSERT IGNORE INTO settings VALUES ('npc_time_format','H:i');";
-+	$sql[] = "INSERT IGNORE INTO settings VALUES ('npc_log_level','0');";
++	$sql[] = "INSERT IGNORE INTO settings (name, value) VALUES ('npc_date_format','Y-m-d');";
++	$sql[] = "INSERT IGNORE INTO settings (name, value) VALUES ('npc_time_format','H:i');";
++	$sql[] = "INSERT IGNORE INTO settings (name, value) VALUES ('npc_log_level','0');";
 +
      if (!in_array('npc_acknowledgements', $tables)) {
 -        $sql[] = "CREATE TABLE `npc_acknowledgements` (
