@@ -4,7 +4,6 @@
 # - forum thread: http://forums.cacti.net/viewtopic.php?t=26540
 %define		plugin	npc
 %define		php_min_version 5.2.1
-%include	/usr/lib/rpm/macros.php
 Summary:	Nagios Plugin for Cacti (NPC)
 Summary(pl.UTF-8):	Wtyczka do Cacti - NPC
 Name:		cacti-plugin-npc
