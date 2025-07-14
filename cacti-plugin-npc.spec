@@ -59,8 +59,8 @@ mv %{plugin}/*.debug .
 mv %{plugin}/build.xml .
 mv %{plugin}/{README,LICENSE} .
 %undos -f php README
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 cd %{plugin}
 
